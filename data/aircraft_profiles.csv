@@ -1,0 +1,4 @@
+name,max_takeoff_Mass,empty_Mass,fuel_capacity,wing_area,aspect_ratio,height_com,cdo,clto,oswald_eff,engine_thrust,sfc
+A320,78000,42600,24000,122.6,9.39,10.668,0.02,1.8,0.8,240000,1.7e-05
+B737,70307,41413,20890,124.6,9.45,10.16,0.02,1.7,0.78,242000,1.75e-05
+EmbraerE190,51800,28700,12970,92.5,8.4,9.5,0.022,1.6,0.81,200000,1.8e-05
