@@ -57,13 +57,13 @@ python main.py
   ### Sample Output for A320
 
 **Altitude vs Time**
-![Altitude vs Time](.../plots/sample_plots/Altitude-Time_A320.png)
+![Altitude vs Time](plots/sample_plots/Altitude-Time_A320.png)
 
 **True Airspeed vs Time**
-![TAS vs Time](.../plots/sample_plots/TAS-Time_A320.png)
+![TAS vs Time](plots/sample_plots/TAS-Time_A320.png)
 
 **Fuel vs Time**
-![Fuel vs Time](.../plots/sample_plots/Fuel-Time_A320.png)
+![Fuel vs Time](plots/sample_plots/Fuel-Time_A320.png)
 
 ## Dependencies
 
