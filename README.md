@@ -1,85 +1,114 @@
 # Aircraft Mission Simulation
 
-This project simulates the performance of a fixed-wing, subsonic aircraft through a complete mission profile—including takeoff, climb, cruise, descent, and landing. The simulation is modular and designed for educational and analytical use in the field of aeronautical engineering.
+This project simulates the full mission profile of a fixed-wing, subsonic aircraft, including takeoff, climb, cruise, descent, and landing. It is intended as an educational and analytical tool for early-stage aerospace engineering development and can be extended for more advanced research.
 
-## Project Overview
+## Overview
 
-The simulation is built using Python and structured for clarity, modularity, and extensibility. Each mission phase is represented by a dedicated function and relies on standard aerodynamic and atmospheric models.
+The simulation is modular, physics-based, and customizable. Users can define aircraft parameters, mission profiles, and atmospheric models to observe performance metrics such as velocity, altitude, fuel consumption, and total mission time. The code is implemented in Python with a structured, object-oriented architecture.
 
-## Directory Structure
+## Features
+
+- Modular simulation of complete mission profile
+- ISA-based atmospheric modeling
+- Lift, drag, and thrust calculations using standard aerodynamic models
+- Time-step-based fuel and velocity tracking
+- Configurable aircraft and mission parameters
+- CSV logging of mission summary data
+- Plots of key mission metrics (altitude, TAS, fuel)
+
+## Physics and Governing Equations
+
+| Parameter     | Equation |
+|--------------|----------|
+| Lift          | \( L = \frac{1}{2} \rho V^2 S C_L \) |
+| Drag          | \( D = \frac{1}{2} \rho V^2 S \left(C_{D_0} + \frac{C_L^2}{\pi e AR}\right) \) |
+| Thrust        | Defined per phase or assumed constant |
+| Atmosphere    | Based on ISA: piecewise lapse rate model |
+| Fuel Burn     | \( \dot{m}_{fuel} = \frac{T \cdot SFC}{g} \) |
+| TAS from CAS  | Based on compressibility corrections (subsonic only) |
+
+## Project Structure
 
 ```
 aircraft_mission_sim/
 │
-├── main.py                        # Main script to run the mission simulation
+├── main.py                      # Entry point for the simulation
+│
 ├── configs/
-│   ├── aircraft_config.py         # Aircraft parameters (from class or CSV)
-│   └── mission_config.py          # Mission definitions (altitude, reserve fuel, etc.)
+│   ├── aircraft_config.py       # Aircraft parameters
+│   └── mission_config.py        # Mission setup (altitude, reserve fuel, etc.)
+│
 ├── models/
-│   ├── atmosphere.py              # ISA model: temperature, pressure, density, sound speed
-│   ├── aerodynamics.py            # Lift, drag, thrust calculations
-│   ├── performance.py             # Fuel usage, range, and climb performance
-│   └── mission_simulator.py       # Controls flight phase transitions and simulation steps
+│   ├── atmosphere.py            # ISA atmosphere model
+│   ├── aerodynamics.py          # Lift, drag, and thrust models
+│   ├── performance.py           # Climb, cruise, descent performance
+│   └── mission.py               # Segment controller
+│
+├── simulator/
+│   └── mission_simulator.py     # Runs mission segments in sequence
+│
 ├── plots/
-│   └── visualizer.py              # Plots altitude, TAS, and fuel logs
+│   └── visualizer.py            # Plotting functions for mission metrics
+│
+├── utils/
+│   └── log_results.py           # CSV logging utility
+│
 ├── data/
-│   └── aircraft_profiles.csv      # Optional CSV for loading multiple aircraft configurations
-└── docs/
-    └── README.md                  # Project documentation
+│   └── aircraft_profiles.csv    # Optional input database
+│
+├── docs/
+│   ├── theory.md                # Theory, assumptions, and model references
+│   └── sample_plots/           # Example mission outputs (PNG)
+│
+└── logs/
+    └── mission_logs.csv         # Simulation output logs
 ```
 
-## Features
+## Example Output Plots
 
-- Simulates complete flight missions with defined aircraft and mission parameters.
-- Modular structure allows for easy addition or replacement of models (e.g., aerodynamic or engine models).
-- Implements the International Standard Atmosphere (ISA) model.
-- Uses classical equations for climb performance and fuel consumption (e.g., Breguet range).
-- Generates clean plots for altitude, true airspeed (TAS), and fuel usage over time.
+- Altitude vs. Time  
+- Fuel Remaining vs. Time  
+- True Airspeed (TAS) vs. Time  
 
-## How to Run
+(See `docs/sample_plots/` for visuals.)
 
-Ensure you have Python installed along with the required libraries (`numpy`, `matplotlib`). Then run:
+## Installation
+
+Clone the repository:
+```bash
+git clone https://github.com/yourusername/aircraft-mission-simulator.git
+cd aircraft-mission-simulator
+```
+
+Install required packages (if any):
+```bash
+pip install -r requirements.txt
+```
+
+## Running the Simulation
 
 ```bash
 python main.py
 ```
 
-## Outputs
+## Logging Results
 
-- Takeoff time and distance
-- Climb profile (altitude, fuel usage, time)
-- Cruise and descent placeholders (to be implemented)
-- Visual plots:
-  - Altitude vs Time
-  - TAS vs Time
-  - Fuel vs Time
+After execution, mission summary results are stored in `outputs/output.csv` and can be used for post-analysis or performance tracking.
 
-  ### Sample Output for A320
+## Assumptions and Limitations
 
-**Altitude vs Time**
-![Altitude vs Time](plots/sample_plots/Altitude-Time_A320.png)
+- Subsonic aircraft only
+- ISA atmosphere; no weather, wind, or humidity effects
+- Flat Earth assumption (no curvature or Coriolis effects)
+- Constant SFC and thrust within each phase
+- No flap/gear configuration changes during flight
 
-**True Airspeed vs Time**
-![TAS vs Time](plots/sample_plots/TAS-Time_A320.png)
+## License
 
-**Fuel vs Time**
-![Fuel vs Time](plots/sample_plots/Fuel-Time_A320.png)
+This project is intended for educational and research purposes.
 
-## Dependencies
+## Contact
 
-- Python 3.x
-- NumPy
-- Matplotlib
-
-## Future Work
-
-- Implement descent and landing simulation
-- Introduce environmental effects (wind, temperature variation)
-- Expand to include multiple aircraft configurations via CSV
-- Enable output export to CSV or Excel for further analysis
-
-## Author
-
-Anhad Khurana  
-Undergraduate Student, Aeronautical and Astronautical Engineering  
-Purdue University
+Author: Anhad Khurana  
+AAE Undergraduate, Purdue University  
+LinkedIn: [linkedin.com/in/anhadkhurana](https://www.linkedin.com/in/anhadkhurana)
